@@ -1,6 +1,6 @@
 /**
  * Angular Carousel - Mobile friendly touch carousel for AngularJS
- * @version v0.2.0 - 2014-02-18
+ * @version v0.2.0 - 2014-02-25
  * @link http://revolunet.github.com/angular-carousel
  * @author Julien Bouquillon <julien@revolunet.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -29,15 +29,23 @@ angular.module('angular-carousel')
     },
     link: function(scope, element, attrs) {
       scope.prev = function() {
-        scope.index--;
+        if(sope.index === 0) {
+          scope.index = scope.items.length-1;
+        } else {  
+          scope.index--;
+        }
       };
       scope.next = function() {
-        scope.index++;
+        if(scope.index === scope.items.length-1) {
+          scope.index=0;
+        } else {   
+          scope.index++;
+        }   
       };
     },
     template: '<div class="rn-carousel-controls">' +
-                '<span class="rn-carousel-control rn-carousel-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="rn-carousel-control rn-carousel-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
+                '<span class="rn-carousel-control rn-carousel-control-prev" ng-click="prev()"></span>' +
+                '<span class="rn-carousel-control rn-carousel-control-next" ng-click="next()"></span>' +
               '</div>'
   };
 }]);
