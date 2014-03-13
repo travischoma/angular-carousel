@@ -191,7 +191,11 @@
                         offset = x;
                         var move = -Math.round(offset);
                         move += (scope.carouselBufferIndex * containerWidth);
-                        carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+                        if($('html').hasClass('no-csstransforms3d')) {
+                          carousel[0].style[transformProperty] = 'translate(' + move + 'px, 0)';
+                        } else {
+                          carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+                        }
                     }
 
                     function autoScroll() {
